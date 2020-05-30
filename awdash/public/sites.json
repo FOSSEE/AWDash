@@ -1,0 +1,11 @@
+{
+   "defaultdate":"default start date of logs",
+   "sites":[{
+        "domain":"domain to show in the list as name",
+        "awstats":"link of individual awstats url for the domain"
+    },
+    {
+        "domain":"",
+        "awstats":""
+    }]
+}

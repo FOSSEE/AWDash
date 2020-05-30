@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awdash Beta</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="index.css">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-d">
+            <a class="navbar-brand" href="#">AWDASH</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">API Docs</a>
+                </li>
+                </ul>
+
+                <form id="filterform" class="form-inline my-2 my-lg-0">
+                    <div class="input-col input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text"><i class="fa fa-globe" aria-hidden="true"></i></div>
+                        </div>
+                        <select id="myselect" class="form-control">
+                           <option value=''>All Websites</option>
+                        </select>
+                      </div>
+                    
+                      <div class="input-col input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+                        </div>
+                        <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="From"/>
+                      </div>
+
+                      <div class="input-col input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+                        </div>
+                        <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="To"/>
+                      </div>
+
+                      <button id="filter" class="input-col btn btn-outline-primary my-2 my-sm-0">Submit</button>
+                      <button id="reset" class="input-col btn btn-primary my-2 my-sm-0"><i class="fa fa-undo" aria-hidden="true"></i></button>
+                </form>
+              
+            </div>
+          </nav>
+    </header>
+
+    <h6 id="no-data"></h6>
+
+    <section class="table-box container">
+
+      <div id="loading" class="spinner-border text-primary loader" style="width: 2.5rem; height: 2.5rem;" role="status">
+        <span class="sr-only"></span>
+      </div>
+
+       <div class="table-responsive">
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Website</th>
+                <th scope="col">Unique Visits(Monthly)</th>
+                <th scope="col">Total Visits</th>
+                <th scope="col">Total Page Loads</th>
+                <th scope="col">Hits</th>
+                <th scope="col">Bandwidth</th>
+                <th scope="col">Link</th>
+              </tr>
+            </thead>
+            <tbody id="table-body">
+              
+            </tbody>
+          </table>
+        </div>  
+    </section>
+
+    <footer>
+        <div class="row">
+            <div class="ft-col col-4">
+                          
+            </div>
+            <div class="ft-col col-4">
+                <span style="font-size:0.7em">&copy Copyright 2020 || All Rights Reserved <br/>
+                                              Powered By FOSSEE, IIT Bombay</span>  
+            </div>
+            <div class="ft-col col-4">
+                
+            </div>
+        </div>
+     
+    </footer>
+
+<script src="index.js"></script>
+</body>
+</html>
