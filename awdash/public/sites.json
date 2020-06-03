@@ -1,11 +1,14 @@
 {
    "defaultdate":"default start date of logs",
+   "defaultpath":"default path of awstats log files",
    "sites":[{
         "domain":"domain to show in the list as name",
-        "awstats":"link of individual awstats url for the domain"
+        "awstats":"link of individual awstats url for the domain",
+        "filename":"domain used as filename"
     },
     {
         "domain":"",
-        "awstats":""
+        "awstats":"",
+        "filename":""
     }]
 }

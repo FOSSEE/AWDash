@@ -62,7 +62,7 @@ class awfile {
 
 						do {
 							$str = trim(fgets($fd));
-							if ($str{0} ==" ") continue;
+							if ($str[0] ==" ") continue;
 
 							list($elem,$pos) = explode(" ",$str);
 							if (isset($this->_positions[$elem])) 
@@ -134,6 +134,7 @@ class awfile {
 								list($elem,$numpages,$hits,$bandwidth,$numvisits) = explode(" ",trim(fgets($fd)));
 								$this->aDays[(int)substr($elem,6,2)] = array($numpages, $hits, $bandwidth, $numvisits);
 								$n--;
+                                                //echo $this->aDays[(int)substr($elem,6,2)];
 						}
 												
 						fseek($fd,$this->_positions["POS_SESSION"]);

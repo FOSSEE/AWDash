@@ -99,7 +99,9 @@ class WebsiteController {
 
      foreach ($website as $web)
      {
-     $url = 'https://'.$web['domain'].'/data/awstats/awstats.php?sd='.$sd.'&ed='.$ed.'&sm='.$sm.'&em='.$em.'&sy='.$sy.'&ey='.$ey.'&web='.$web['domain'];
+     $url = 'https://'.$web['domain'].'/data/awstats/awstats.php?sd='.$sd.'&ed='.$ed.'&sm='.$sm.'&em='.$em.'&sy='.$sy.'&ey='.$ey.'&path='.$this->sites['defaultpath'].'&web='.$web['filename'];
+//     $url = "https://awdash.fossee.in?sd=".$sd.'&ed='.$ed.'&sm='.$sm.'&em='.$em.'&sy='.$sy.'&ey='.$ey.'&web='.$web['domain'];
+//     echo $url;
      $contents = json_decode(file_get_contents($url));
      $contents -> sno = $this -> sno;
      $this -> sno += 1;

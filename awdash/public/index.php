@@ -14,7 +14,7 @@ $uri = explode( '/', $uri );
 if ($uri[1] !== 'websites') {
     $file = 'index.html';
     if (file_exists($file)) {
-        header('Location: Domain');
+        header('Location: https://awdash.fossee.in/index.html');
     } else {
        // throw new \Slim\Exception\NotFoundException($request, $response);
        exit();

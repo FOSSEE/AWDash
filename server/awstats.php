@@ -24,10 +24,10 @@ $endm    = $_GET['em'];
 $starty  = $_GET['sy'];
 $endy    = $_GET['ey'];
 $website = $_GET['web'];
-
+$pathaw    = $_GET['path'];
 //echo "vars= ".$startm.$endm.$starty.$endy.$website;
 
-function data($sd, $ed, $sm, $em, $sy, $ey, $web)
+function data($sd, $ed, $sm, $em, $sy, $ey, $web, $path)
 {
 
        $result = array();
@@ -43,10 +43,10 @@ function data($sd, $ed, $sm, $em, $sy, $ey, $web)
 //     Total Calculation leaving start month and end month
        for($i=$sy;$i<=$ey;$i++){
 	    for($j=(($i==$sy)?($sm+1):1);$j<=(($i==$ey)?($em-1):12);$j++){
-
-                $file = 'awstats/awstats'.$j.$i.'.'.$web.'.txt';
+//                echo $sy.$sm."---";
+                $file = $path.'awstats'.$j.$i.'.'.$web.'.txt';
 		if($j < 10){
-		    $file = 'awstats/awstats0'.$j.$i.'.'.$web.'.txt';
+		    $file = $path.'awstats0'.$j.$i.'.'.$web.'.txt';
 		}
 
 		if(file_exists($file)){
@@ -54,7 +54,7 @@ function data($sd, $ed, $sm, $em, $sy, $ey, $web)
 	             if ($aw->Error()) die($aw->GetError());
 		     $total_visit += $aw->GetVisits();
 		     $unique_visit += $aw->GetUniqueVisits();
-                     
+
                      foreach ($aw->GetDays() as $day=>$stats)
                      {
                          $bandwidth   += $stats[2];
@@ -68,16 +68,17 @@ function data($sd, $ed, $sm, $em, $sy, $ey, $web)
 //$output = array('website' => $web, 'unique_visit' => $unique_visit, 'total_visit' => $total_visit, 'total_page_loads' => $page_loads, 'total_hits' => $hits, 'total_bandwidth' => $bandwidth);
 //echo json_encode($output);
 
+if(!($sm == $em && $sy == $ey))
+{
 //      Calculation for start month
-        $file = 'awstats/awstats'.$sm.$sy.'.'.$web.'.txt';
+        $file = $path.'awstats'.$sm.$sy.'.'.$web.'.txt';
                 if($sm < 10){
-                    $file = 'awstats/awstats0'.$sm.$sy.'.'.$web.'.txt';
+                    $file = $path.'awstats0'.$sm.$sy.'.'.$web.'.txt';
                 }
-
         if(file_exists($file)){
                      $aw = new awfile($file);
                      if ($aw->Error()) die($aw->GetError());
-//        echo json_encode($aw->GetDays());
+         //echo json_encode($aw->GetDays());
         $unique_visit += $aw->GetUniqueVisits();
         foreach ($aw->GetDays() as $day=>$stats)
           {
@@ -95,16 +96,22 @@ function data($sd, $ed, $sm, $em, $sy, $ey, $web)
 //echo json_encode($output);
 
 
+
 //      Calculation for end month
-        $file = 'awstats/awstats'.$em.$sy.'.'.$web.'.txt';
+        $file = $path.'awstats'.$em.$sy.'.'.$web.'.txt';
                 if($em < 10){
-                    $file = 'awstats/awstats0'.$em.$sy.'.'.$web.'.txt';
+                    $file = $path.'awstats0'.$em.$sy.'.'.$web.'.txt';
                 }
 
         if(file_exists($file)){
                      $aw = new awfile($file);
                      if ($aw->Error()) die($aw->GetError());
+        //echo json_encode($aw->GetDays());
+        if($sy == $ey && $sm == $em){
+        }
+        else{
         $unique_visit += $aw->GetUniqueVisits();
+        }
         foreach ($aw->GetDays() as $day=>$stats)
           {
               if($day <= $ed)
@@ -117,15 +124,43 @@ function data($sd, $ed, $sm, $em, $sy, $ey, $web)
           }
        }
 
+//$output = array('website' => $web, 'unique_visit' => $unique_visit, 'total_visit' => $total_visit, 'total_page_loads' => $page_loads, 'total_hits' => $hits, 'total_bandwidth' => $bandwidth);
+//echo json_encode($output);
+}
 
+else{
 
+//      Calculation for common month
+        $file = $path.'awstats'.$sm.$sy.'.'.$web.'.txt';
+                if($sm < 10){
+                    $file = $path.'awstats0'.$sm.$sy.'.'.$web.'.txt';
+                }
+        if(file_exists($file)){
+                     $aw = new awfile($file);
+                     if ($aw->Error()) die($aw->GetError());
+         //echo json_encode($aw->GetDays());
+        $unique_visit += $aw->GetUniqueVisits();
+        foreach ($aw->GetDays() as $day=>$stats)
+          {
+              if($day >= $sd && $day <= $ed)
+              {
+               $total_visit += $stats[3];
+               $bandwidth   += $stats[2];
+               $hits        += $stats[1];
+               $page_loads  += $stats[0];
+            }
+          }
+       }
+
+}
+        $bandwidth = round($bandwidth/1048576);
 	$output = array('website' => $web, 'unique_visit' => $unique_visit, 'total_visit' => $total_visit, 'total_page_loads' => $page_loads, 'total_hits' => $hits, 'total_bandwidth' => $bandwidth);
 //	var_dump($output);
 	echo json_encode($output);
 	return $output;
 }
 
-data($startd, $endd, $startm, $endm, $starty, $endy, $website);
+data($startd, $endd, $startm, $endm, $starty, $endy, $website, $pathaw);
 
 /*	
 	$aw = new awfile($file);
